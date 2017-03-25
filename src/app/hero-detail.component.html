@@ -1,0 +1,22 @@
+<div *ngIf="hero">
+    <div class="container-fluid">
+      
+      <div class="info-card">
+        <div class="front">
+          <img src={{hero.img_url}} class="card-image" alt="Hero Image">					
+		</div>			  
+        <div class="back">
+          <label>Nome Mutante: </label>
+          <strong>{{hero.xname}}</strong>				  
+          <label>Poderes: </label>
+            <ul class="list-group">
+              <li *ngFor="let power of hero.powers; let i = index" [attr.data-index]="i" class="list-group-item">            
+                {{power}}                
+              </li>
+            </ul>									  
+            <button type="button" class="btn btn-primary" (click)="goBack()">Voltar</button>
+        </div>        
+	  </div>  
+                         
+    </div>
+</div>

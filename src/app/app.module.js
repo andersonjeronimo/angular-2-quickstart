@@ -11,12 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var router_1 = require('@angular/router');
+var http_1 = require('@angular/http');
+//import { RouterModule }   from '@angular/router';
 var app_component_1 = require('./app.component');
 var hero_detail_component_1 = require('./hero-detail.component');
 var heroes_component_1 = require('./heroes.component');
 var hero_service_1 = require('./hero.service');
 var dashboard_component_1 = require('./dashboard.component');
+var hero_search_component_1 = require('./hero-search.component');
+var app_routing_module_1 = require('./app-routing.module');
+// Imports for loading & configuring the in-memory web api
+var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
+var in_memory_data_service_1 = require('./in-memory-data.service');
 //NgModule is a decorator function that takes a single metadata object whose properties describe the module. 
 //The most important properties are: imports, exports, declarations, providers, bootstrap
 var AppModule = (function () {
@@ -28,25 +34,9 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                router_1.RouterModule.forRoot([
-                    {
-                        path: 'heroes',
-                        component: heroes_component_1.HeroesComponent
-                    },
-                    {
-                        path: 'dashboard',
-                        component: dashboard_component_1.DashboardComponent
-                    },
-                    {
-                        path: '',
-                        redirectTo: '/dashboard',
-                        pathMatch: 'full'
-                    },
-                    {
-                        path: 'detail/:id',
-                        component: hero_detail_component_1.HeroDetailComponent
-                    },
-                ])
+                http_1.HttpModule,
+                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
+                app_routing_module_1.AppRoutingModule
             ],
             //declarations - the view classes that belong to this module. 
             //Angular has three kinds of view classes: components, directives, and pipes.
@@ -54,18 +44,15 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 hero_detail_component_1.HeroDetailComponent,
                 dashboard_component_1.DashboardComponent,
-                heroes_component_1.HeroesComponent
+                heroes_component_1.HeroesComponent,
+                hero_search_component_1.HeroSearchComponent,
             ],
             //providers - creators of services that this module contributes to the global collection of services; 
             //they become accessible in all parts of the app.
-            providers: [
-                hero_service_1.HeroService
-            ],
+            providers: [hero_service_1.HeroService],
             //bootstrap - the main application view, called the root component, that hosts all other app views. 
             //Only the root module should set this bootstrap property.
-            bootstrap: [
-                app_component_1.AppComponent
-            ]
+            bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

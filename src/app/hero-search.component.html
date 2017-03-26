@@ -1,0 +1,10 @@
+<form class="form-horizontal">
+  <div class="form-group">    
+    <div class="col-sm-2">
+      <input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control" placeholder="Select a hero" />
+      <select multiple class="form-control" size="3">
+        <option *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)">{{hero.name}}</option>
+      </select>
+    </div>
+  </div>
+</form>
